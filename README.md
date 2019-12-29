@@ -1,10 +1,12 @@
-# fofa_view
+# FOFA Pro view
 
-Fofa pro view 是一款FOFA Pro 资产展示浏览器插件，目前兼容 Chrome、Firefox。
+FOFA Pro view 是一款FOFA Pro 资产展示浏览器插件，目前兼容[Chrome](https://www.google.com/chrome/)、[Firefox](https://www.mozilla.org/)、[Opera](https://www.opera.com/)。
 
 The Fofa Pro View plugin tells you where the website is hosted (country, city), who owns the IP and what other services/ ports are open.
 
 The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has any information for the current website. Is the website also running FTP, DNS, SSH or some unusual service? With this plugin you can see all the info that Fofa Pro has collected on a given website/ domain.
+
+项目地址：[https://github.com/0nise/fofa_view](https://github.com/0nise/fofa_view)
 
 ## 安装
 
