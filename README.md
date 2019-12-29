@@ -12,8 +12,6 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 ### Chrome
 
-暂且不支持，插件正在申请提交中。
-
 #### 手动安装
 
 下载版本：https://github.com/0nise/fofa_view/releases
@@ -25,6 +23,8 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 解压插件压缩包，打开 <chrome://extensions/> 并且开启开发者模式，点击 `加载已解压的扩展程序` 选择已经解压的插件目录进行加载。
 
 #### 商城安装
+
+暂且不支持，插件正在申请提交中。
 
 ### FireFox
 
