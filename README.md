@@ -20,7 +20,7 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 ![](4.png)
 
-解压插件压缩包，打开 <chrome://extensions/> 并且开启开发者模式，点击 `加载已解压的扩展程序` 选择已经解压的插件目录进行加载。
+解压插件压缩包，打开 [chrome://extensions/](chrome://extensions/) 并且开启开发者模式，点击 `加载已解压的扩展程序` 选择已经解压的插件目录进行加载。
 
 #### 商城安装
 
@@ -34,7 +34,7 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 ![](6.png)
 
-解压插件压缩包，打开 <about:debugging#/runtime/this-firefox> 点击`临时载入附加组件…`选择下载的插件压缩包。
+解压插件压缩包，打开 [about:debugging#/runtime/this-firefox](about:debugging#/runtime/this-firefox) 点击`临时载入附加组件…`选择下载的插件压缩包。
 
 #### 商城安装
 
