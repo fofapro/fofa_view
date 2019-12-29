@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="styles/popup.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
+
+    <style>
+      p{
+        font-size: 0.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="popup-content">
+      <h1 class="app-name" id="ip"></h1>
+      <div class="layui-card" id="ipInfo">
+        <div class="layui-card-header"><a href="" target="_blank"  id="hostInfo"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;地理位置</a></div>
+        <div class="layui-card-body">
+          <p class="description" id="country">城市：</p>
+          <p class="description" id="city">城市：</p>
+          <p class="description" id="port">端口：</p>
+          <p class="description" id="protocol">协议：</p>
+        </div>
+      </div>
+      <div class="layui-card" id="ipZichan">
+        <div class="layui-card-header"><a id="zichanHost" href="" target="_blank"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;资产信息</a></div>
+        <table id="tableData" class="layui-table" lay-skin="nob" lay-size="sm" lay-even>
+          <colgroup>
+            <col width="260">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+          </colgroup>
+          <thead>
+          <tr>
+            <td>标题</td>
+            <td>协议</td>
+            <td>端口</td>
+            <td>查看</td>
+          </tr>
+          <tbody id="tbody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="scripts/popup.js"></script>
+  </body>
+<!-- style="color: #7A7A7A; font-size: 0.8em;border-collapse: collapse;border-spacing: 0;"-->
+</html>

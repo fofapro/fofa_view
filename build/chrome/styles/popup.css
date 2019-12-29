@@ -1,0 +1,286 @@
+/*
+App reset by Ben Frain @benfrain / benfrain.com
+Slightly modified by Bharani @bharani91 / github.com/bharani91
+*/
+/*Hat tip to @thierrykoblentz for this approach: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+  box-sizing: border-box;
+}
+
+* {
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: inherit;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+input[type],
+[contenteditable] {
+  user-select: text;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*IMPORTANT: This removes the focus outline for most browsers. Be aware this is a backwards accessibilty step! Mozilla (i.e. Firefox) also adds a dotted outline around a tags and buttons when they receive tab focus which I haven't found an unhacky way of removing.*/
+a:focus,
+button:focus {
+  outline: 0;
+}
+
+button {
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
+input,
+fieldset {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+/*This switches the default outline off when an input receives focus (really important for users tabbing through with a keyboard) so ensure you put something decent in for your input focus instead!!*/
+input:focus {
+  outline: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/*Removes the default focusring that Mozilla places on select items. From: http://stackoverflow.com/a/18853002/1147859 
+Ensure you set `#000` to the colour you want your text to appear */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+html, body {
+  box-sizing: border-box;
+}
+
+html:before, html:after, body:before, body:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-size: 16px;
+  color: #111111;
+  font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.75em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1.10em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: .85em;
+}
+
+nav {
+  margin: 1em 0;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 1em;
+  margin-bottom: .25em;
+}
+
+a {
+  text-decoration: none;
+  color: #4990E2;
+}
+
+a:hover, a:focus {
+  color: #2e7fde;
+}
+
+ul, ol {
+  margin-top: 0;
+  padding-top: 0;
+  padding-left: 2.5em;
+}
+
+p {
+  margin: 1em 0;
+  hyphens: auto;
+}
+
+p.lead {
+  font-size: 1.2em;
+}
+
+p:first-child {
+  margin-top: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+p + ul, p + ol {
+  margin-top: -.75em;
+}
+
+dd {
+  margin-bottom: 1em;
+  margin-left: 0;
+  padding-left: 2.5em;
+}
+
+dt {
+  font-weight: 700;
+}
+
+blockquote {
+  margin: 0;
+  padding-left: 2.5em;
+}
+
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  padding: 20px 20px;
+  background: #ffffff;
+}
+
+footer {
+  color: #7A7A7A;
+  text-align: right;
+  font-size: 0.8em;
+}
+
+footer a {
+  outline: none;
+  color: #949494;
+}
+
+footer a:hover {
+  color: #7A7A7A;
+}
+
+.popup-content {
+  min-width: 520px;
+  min-height: 100%;
+  max-width: 750px;
+}
+
+.app-name {
+  font-size: 14px;
+  color: #7A7A7A;
+  text-align: left;
+  margin: 0 auto 1em auto;
+  padding: 0;
+}
+
+.site-description {
+  padding: 0.5em;
+  border: 1px solid #eeeeee;
+  margin: 0;
+}
+
+.site-description h3 {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 0.5em;
+}
+
+.site-description .description {
+  color: #7A7A7A;
+  max-height: 100px;
+  font-size: 0.8em;
+  line-height: 1.2;
+  margin-top: 10px;
+}
+
+.site-description .url {
+  outline: none;
+  text-decoration: none;
+  line-height: 1.2;
+  font-size: 0.8em;
+  word-break: break-word;
+  display: block;
+}
+
+.action-container {
+  margin: 1em auto;
+}
+
+.btn {
+  background: none;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5em 1.5em;
+  background: #4990E2;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 2px;
+  outline: none;
+  font-size: 1em;
+}
