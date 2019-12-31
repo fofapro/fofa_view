@@ -26,7 +26,7 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 #### 商城安装
 
-暂且不支持，插件正在申请提交中。
+![](8.png)
 
 ### FireFox
 
@@ -40,9 +40,13 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 #### 商城安装
 
-暂且不支持，插件正在申请提交中。
+![](7.png)
 
 ## 更新日志
+
+2019-12-31
+
+- Chrome、Firefox可在商城直接搜索安装
 
 2019-12-29
 
