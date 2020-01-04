@@ -8,7 +8,6 @@ html {
 }
 
 * {
-  user-select: none;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-tap-highlight-color: transparent;
   box-sizing: inherit;
@@ -76,7 +75,7 @@ img {
   display: block;
 }
 
-/*Removes the default focusring that Mozilla places on select items. From: http://stackoverflow.com/a/18853002/1147859 
+/*Removes the default focusring that Mozilla places on select items. From: http://stackoverflow.com/a/18853002/1147859
 Ensure you set `#000` to the colour you want your text to appear */
 select:-moz-focusring {
   color: transparent;

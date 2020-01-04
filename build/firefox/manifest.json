@@ -1,6 +1,6 @@
 {
     "name": "FOFA Pro View",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "manifest_version": 2,
     "description": "FOFA Pro view ",
     "icons": {
@@ -42,7 +42,7 @@
     },
     "applications": {
         "gecko": {
-            "id": "my-app-id@mozilla.org"
+            "id": "woo0nise@gmail.com"
         }
     }
 }

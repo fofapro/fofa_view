@@ -44,6 +44,14 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 ## 更新日志
 
+2019-01-04
+
+- 优化：面板上面文字无法直接复制（如ip地址），建议让文字可选取，增加使用便利性
+  
+- 优化：刷新确认按钮第一次打开有半截藏在屏幕里点不到
+
+- 新增：表格Host字段
+
 2019-12-31
 
 - Chrome、Firefox可在商城直接搜索安装

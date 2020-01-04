@@ -1,3 +1,4 @@
+/*
 import fs from "fs";
 import gulp from 'gulp';
 import {merge} from 'event-stream'
@@ -6,6 +7,17 @@ import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
 import preprocessify from 'preprocessify';
 import gulpif from "gulp-if";
+ */
+
+var gulp =require('gulp');
+//var merge = require('event-stream');
+const {merge} = require('event-stream');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var preprocessify = require('preprocessify');
+var gulpif = require("gulp-if");
+var fs = require('fs');
 
 const $ = require('gulp-load-plugins')();
 
@@ -30,16 +42,16 @@ var manifest = {
   firefox: {
     "applications": {
       "gecko": {
-        "id": "my-app-id@mozilla.org"
+        "id": "woo0nise@gmail.com"
       }
     }
   }
-}
+};
 
 // Tasks
 gulp.task('clean', () => {
   return pipe(`./build/${target}`, $.clean())
-})
+});
 
 gulp.task('build', (cb) => {
   $.runSequence('clean', 'styles', 'ext', cb)
@@ -65,7 +77,7 @@ gulp.task('ext', ['manifest', 'js'], () => {
 // -----------------
 gulp.task('js', () => {
   return buildJS(target)
-})
+});
 
 gulp.task('styles', () => {
   return gulp.src('src/styles/**/*.scss')
@@ -104,7 +116,7 @@ gulp.task('dist', (cb) => {
 
 gulp.task('zip', () => {
   return pipe(`./build/${target}/**/*`, $.zip(`${target}.zip`), './dist')
-})
+});
 
 
 // Helpers
@@ -118,6 +130,9 @@ function pipe(src, ...transforms) {
 function mergeAll(dest) {
   return merge(
     pipe('./src/icons/**/*', `./build/${dest}/icons`),
+    pipe('./src/font/**/*', `./build/${dest}/font`),
+    pipe('./src/layer/**/*', `./build/${dest}/layer`),
+    pipe('./src/jquery/**/*', `./build/${dest}/jquery`),
     pipe(['./src/_locales/**/*'], `./build/${dest}/_locales`),
     pipe([`./src/images/${target}/**/*`], `./build/${dest}/images`),
     pipe(['./src/images/shared/**/*'], `./build/${dest}/images`),
@@ -132,7 +147,7 @@ function buildJS(target) {
     'options.js',
     'popup.js',
     'livereload.js'
-  ]
+  ];
 
   let tasks = files.map( file => {
     return browserify({
@@ -149,14 +164,13 @@ function buildJS(target) {
     .pipe(buffer())
     .pipe(gulpif(!production, $.sourcemaps.init({ loadMaps: true }) ))
     .pipe(gulpif(!production, $.sourcemaps.write('./') ))
-    .pipe(gulpif(production, $.uglify({ 
+    .pipe(gulpif(production, $.uglify({
       "mangle": false,
       "output": {
         "ascii_only": true
-      } 
+      }
     })))
     .pipe(gulp.dest(`build/${target}/scripts`));
   });
-
   return merge.apply(null, tasks);
 }

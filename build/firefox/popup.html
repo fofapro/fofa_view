@@ -2,9 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <script src="jquery/jquery-3.4.1.js"></script>
+    <script src="layer/layer.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/layui.css" />
     <link href="styles/popup.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
-
     <style>
       p{
         font-size: 0.8em;
@@ -28,15 +29,17 @@
         <table id="tableData" class="layui-table" lay-skin="nob" lay-size="sm" lay-even>
           <colgroup>
             <col width="260">
-            <col width="100">
-            <col width="100">
-            <col width="100">
+            <col width="50">
+            <col width="50">
+            <col width="200">
+            <col width="50">
           </colgroup>
           <thead>
           <tr>
             <td>标题</td>
             <td>协议</td>
             <td>端口</td>
+            <td>HOST</td>
             <td>查看</td>
           </tr>
           <tbody id="tbody">

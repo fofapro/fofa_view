@@ -21,7 +21,7 @@ const baseFofaUrl = "https://fofa.so/hosts/";
 
 const baseFofaSearch = "https://fofa.so/result?qbase64=";
 
-var getZichan = (ip) => {
+var getZichan = (ip,load) => {
   let newUrl = baseFofaSearch + Base64.encode("ip=\""+ip+"\"");
   axios({
     method: 'get',
@@ -35,10 +35,12 @@ var getZichan = (ip) => {
       let firstNode = cheerio(cheerio(this).find("div[class=list_mod_t]")[0]);
       // 提取 url
       let url = "";
+      let host = "";
       if(firstNode.find("div[class=ip-no-url]").length == 1){
-        // 没有链接
+        host = firstNode.find("div[class=ip-no-url]").text();
       }else{
         url = cheerio(firstNode.find("a")[0]).attr("href");
+        host = cheerio(firstNode.find("a")[0]).text();
       }
       let spanList = firstNode.find("div[class=span]").find("span");
       let port = "80";
@@ -64,6 +66,7 @@ var getZichan = (ip) => {
         <td>${title}</td>
         <td>${protocol}</td>
         <td>${port}</td>
+        <td>${host}</td>
         <td><a href="${url}" target="_blank"><i class="layui-icon">&#xe615;</i></td>
       </tr>
       `;
@@ -72,14 +75,18 @@ var getZichan = (ip) => {
     document.getElementById("tbody").innerHTML = innerHtml;
     // document.getElementById("zichanHost").innerText = newUrl;
     document.getElementById("zichanHost").setAttribute("href",newUrl);
+    layer.close(load);
   })
-}
+};
 
 var template = (data) => {
   if(data == null){
-    alert("请刷新");
+    //alert("请刷新");
+    layer.msg('请刷新Tab页面');
     return
   }
+  console.log(data);
+  var load = layer.load(0, {content: ""});
   let json = JSON.stringify(data);
   let url = data.url;
   let ip = "";
@@ -92,7 +99,6 @@ var template = (data) => {
     }
   }
   let newUrl = baseFofaUrl+ip;
-  // document.getElementById("ipInfo").setAttribute("style","display: none;");
   axios({
     method: 'get',
     url: newUrl,
@@ -128,18 +134,16 @@ var template = (data) => {
     });
     document.getElementById("country").innerHTML = country;
     document.getElementById("city").innerHTML = city;
-    //document.getElementById("group").innerHTML = group;
-    //document.getElementById("asn").innerHTML = asn;
     document.getElementById("port").innerHTML = port;
     document.getElementById("protocol").innerHTML = protocol;
-    // document.getElementById("hostInfo").innerText = newUrl;
     document.getElementById("hostInfo").setAttribute("href",newUrl);
-    getZichan(ipReg.exec(rspIp)[0]);
+    getZichan(ipReg.exec(rspIp)[0],load);
   });
 }
 
 ext.tabs.query({active: true, currentWindow: true}, function(tabs) {
   var activeTab = tabs[0];
+  console.log(activeTab)
   chrome.tabs.sendMessage(activeTab.id, { action: 'process-page' }, template);
 });
 
