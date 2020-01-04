@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbd90db7-a0dc-4088-b912-6926a573515b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/chrome/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/chrome/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/chrome/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/chrome/popup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/chrome/scripts/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/chrome/scripts/popup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/chrome/styles/options.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/chrome/styles/options.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/chrome/styles/popup.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/chrome/styles/popup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/firefox/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/firefox/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/firefox/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/firefox/popup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/firefox/scripts/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/firefox/scripts/popup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/firefox/styles/options.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/firefox/styles/options.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/firefox/styles/popup.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/firefox/styles/popup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/opera/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/opera/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/opera/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/opera/popup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/opera/scripts/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/opera/scripts/popup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/opera/styles/options.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/opera/styles/options.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/opera/styles/popup.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/opera/styles/popup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gulpfile.babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.babel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/popup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/popup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/modules/_reset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/modules/_reset.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source.zip" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -41,10 +19,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="210">
+                <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -77,6 +58,7 @@
       <find>none</find>
       <find>select</find>
       <find>layer</find>
+      <find>eslint</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -98,8 +80,8 @@
         <option value="$PROJECT_DIR$/gulpfile.babel.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -193,12 +175,12 @@
       <workItem from="1577621976984" duration="877000" />
       <workItem from="1577695864505" duration="170000" />
       <workItem from="1577961082852" duration="1663000" />
-      <workItem from="1578044862445" duration="13122000" />
+      <workItem from="1578044862445" duration="13898000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17540000" />
+    <option name="totallyTimeSpent" value="18316000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -405,13 +387,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="39" column="32" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -447,20 +422,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="508">
-            <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        <state relative-caret-position="481">
+          <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="210">
+            <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
