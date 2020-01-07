@@ -9,19 +9,9 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 项目地址：[https://github.com/0nise/fofa_view](https://github.com/0nise/fofa_view)
 
 
-https://github.com/0nise/fofa_view/releases
+## 微信交流群
 
-FOFA Pro view 0.0.2版本已更新，Firefox可直接在商城更新，Chrome 预计2019年2月6或2月7日可进行安装更新。
-
-更新日志：
-
-- 优化：面板上面文字无法直接复制（如ip地址），建议让文字可选取，增加使用便利性。
-
-- 优化：刷新确认按钮第一次打开有半截藏在屏幕里点不到。
-
-- 优化：网络加载较慢导致样式、图标加载失败问题。
-
-- 新增：表格Host字段。
+![](10.jpg)
 
 ## 安装
 
