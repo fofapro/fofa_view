@@ -1,6 +1,6 @@
 {
   "name": "fofa_view",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "FOFA Pro view",
   "scripts": {
     "chrome-build": "cross-env TARGET=chrome gulp",
@@ -17,13 +17,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nise/fofa_view"
+    "url": "https://github.com/fofapro/fofa_view"
   },
   "author": "R4v3zn <woo0nise@gmail.com> (https://github.com/0nise)",
   "bugs": {
-    "url": "https://github.com/0nise/fofa_view/issues"
+    "url": "https://github.com/fofapro/fofa_view/issues"
   },
-  "homepage": "https://github.com/0nise/fofa_view",
+  "homepage": "https://github.com/fofapro/fofa_view",
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "babel-core": "^6.1.2",

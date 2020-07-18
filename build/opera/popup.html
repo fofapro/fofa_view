@@ -10,22 +10,38 @@
       p{
         font-size: 0.8em;
       }
+      .f-tags {
+        font-size: 12px;
+        padding: 2px 5px;
+        border-radius: 11px;
+        margin-left: 10px;
+        background-color: rgba(67,154,255,0.06);
+        border: 1px solid #439aff;
+      }
+      .second {
+        color: #439aff;
+      }
     </style>
   </head>
   <body>
     <div id="app" class="popup-content">
       <h1 class="app-name" id="ip"></h1>
       <div class="layui-card" id="ipInfo">
-        <div class="layui-card-header"><a href="" target="_blank"  id="hostInfo"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;地理位置</a></div>
+        <div class="layui-card-header"><a href="" target="_blank"  id="hostInfo"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;组件信息</a></div>
         <div class="layui-card-body">
-          <p class="description" id="country">城市：</p>
+          <p class="description" id="country">国家：</p>
           <p class="description" id="city">城市：</p>
+          <p class="description" id="group">组织：</p>
+          <p class="description" id="asn">ASN：</p>
           <p class="description" id="port">端口：</p>
           <p class="description" id="protocol">协议：</p>
         </div>
       </div>
       <div class="layui-card" id="ipZichan">
-        <div class="layui-card-header"><a id="zichanHost" href="" target="_blank"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;资产信息</a></div>
+        <div class="layui-card-header">
+          <a id="zichanHost" href="" target="_blank"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;资产信息</a> &nbsp;&nbsp;&nbsp;
+          <a id="cHost" href="" target="_blank"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;C段</a>
+        </div>
         <table id="tableData" class="layui-table" lay-skin="nob" lay-size="sm" lay-even>
           <colgroup>
             <col width="260">

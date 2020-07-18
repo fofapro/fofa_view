@@ -23,43 +23,76 @@ const baseFofaSearch = "https://fofa.so/result?qbase64=";
 
 var getZichan = (ip,load) => {
   let newUrl = baseFofaSearch + Base64.encode("ip=\""+ip+"\"");
+  let cHost = baseFofaSearch + Base64.encode("ip=\""+ip+"/24\"");
   axios({
     method: 'get',
     url: newUrl,
   }).then(function (response) {
     let rspData = response.data;
     let root = cheerio.load(rspData);
-    let list = root("div[class=list_mod]");
+    let list = root("div[id=ajax_content]").find("div[class~=right-list-view-item]")
     let innerHtml = "";
     list.each(function (i,elem) {
-      let firstNode = cheerio(cheerio(this).find("div[class=list_mod_t]")[0]);
-      // 提取 url
+      let ndoe = cheerio(cheerio(this).find("div[class~=box-sizing]")[0])
+      let reDomain = ndoe.find("div[class=re-domain]")
+      let domainList = reDomain.find("a")
       let url = "";
       let host = "";
-      if(firstNode.find("div[class=ip-no-url]").length == 1){
-        host = firstNode.find("div[class=ip-no-url]").text();
-      }else{
-        url = cheerio(firstNode.find("a")[0]).attr("href");
-        host = cheerio(firstNode.find("a")[0]).text();
+      if (domainList != null && domainList.length > 0){
+        domainList.each(function (j,domainElement) {
+          let domainNode  = cheerio(cheerio(cheerio(this)))
+          let domainNodeClass = domainNode.attr("class")
+          if(domainNodeClass === undefined || domainNodeClass === null){
+            host = domainNode.attr("href")
+            return false
+          }
+        })
+      }else {
+        host = reDomain.text().replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
       }
-      let spanList = firstNode.find("div[class=span]").find("span");
-      let port = "80";
-      let protocol = "http";
-      let title = "";
-      spanList.each(function (j,ele) {
-        let text = cheerio(ele).text();
-        text = text.replace("\n","").replace(" ","").replace("\t","").replace("<br />","");
-        text = text.replace("          ","").replace("&nbsp;","").replace(" ","");
-        if(Number(text)){
-          port = Number(text)+"";
-        }else{
-          protocol = text;
+      let port = ""
+      let protocol = ""
+      let portNode = cheerio(cheerio(this).find("div[class~=re-port]")[0])
+      let portElement = portNode.find("a[class~=wordLineFeed]")
+      if(portElement !== null && portElement !== undefined){
+        port = portElement.text()
+      }else{
+        let hostSplit = host.split(":")
+        if(hostSplit.length > 1){
+          port = hostSplit[1]
         }
-      });
-      let liNodeList = cheerio(this).find("div[class=list_mod_c]").find("ul[class=list_sx1]").find("li");
-      if(liNodeList.length > 6){
-        title = cheerio(liNodeList[0]).text();
-        title = title.replace(" ","").replace("\t", "").replace("\n","").replace("<br />","");
+      }
+      port = port.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
+      let protocolElement = portNode.find("a[class~=pro]")
+      if(protocolElement !== null && protocolElement !== undefined){
+        protocol = protocolElement.text()
+      }
+      if(port === "443" && (protocol == null || protocol === "" || protocol === undefined)){
+        protocol = "https"
+      }
+      if(protocol == null || protocol === "" || protocol === undefined){
+        protocol = "http"
+      }
+      if(port === "" || port === null || port === undefined){
+        port = "80"
+      }
+      if((protocol != null && protocol !== undefined && protocol !== "") && (protocol !== "http" && protocol !== "https") && host.indexOf(":") === -1){
+        host = host+":"+port
+      }
+      let title = ""
+      let domainNextNode = reDomain.next()
+      let domainTitleNode = domainNextNode.find("a")
+      if(domainTitleNode === undefined || domainTitleNode == null || domainTitleNode.length === 0){
+        title = domainNextNode.text()
+      }
+      title = title.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
+      if(title === "" && (protocol !== "http" && protocol !== "https")){
+        title = protocol
+      }
+      if(host.indexOf("http") > -1){
+        url = host
+      }else{
+        url = newUrl
       }
       let line = `
       <tr>
@@ -73,8 +106,8 @@ var getZichan = (ip,load) => {
       innerHtml += line;
     })
     document.getElementById("tbody").innerHTML = innerHtml;
-    // document.getElementById("zichanHost").innerText = newUrl;
     document.getElementById("zichanHost").setAttribute("href",newUrl);
+    document.getElementById("cHost").setAttribute("href",cHost);
     layer.close(load);
   })
 };
@@ -85,7 +118,7 @@ var template = (data) => {
     layer.msg('请刷新Tab页面');
     return
   }
-  console.log(data);
+  // console.log(data);
   var load = layer.load(0, {content: ""});
   let json = JSON.stringify(data);
   let url = data.url;
@@ -105,35 +138,78 @@ var template = (data) => {
   }).then(function (response) {
     let rspData = response.data;
     let root = cheerio.load(rspData);
-    let ipElement = cheerio.load(root('div[class=ip_top]').html());
-    let rspIp = ipElement("span").html().replace("\n","").replace("<br />","").replace(" ","");
-    document.getElementById("ip").innerHTML = rspIp.toLowerCase();
-    let liElementList = root("ul[class=ip_con_ul]").find("li");
+    let rspIp = root("li[class=layui-this]").find("div[class=ellipise]").text()
+    rspIp = rspIp.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
+    let elementList = root("div[class=ip-table]").find("div[class~=ip-table-item]")
     let country = "国家/地区：";
     let city = "城市：";
     let group = "组织：";
     let asn = "ASN：";
     let port = "端口：";
     let protocol = "协议：";
-    liElementList.each(function(i, elem) {
-      let tmpStr = cheerio(cheerio(this).find("span")[1]).text();
-      tmpStr = tmpStr.replace("\n","").replace("\t","").replace("<br>","").replace(" ","");
-      if(i === 0){
-        country = country+tmpStr;
-      }else if(i === 1){
-        city += tmpStr;
-      }else if(i === 2){
-        group += tmpStr;
-      }else if(i === 4){
-        asn += tmpStr;
-      }else if(i === 6){
-        port += tmpStr;
-      }else if(i === 7){
-        protocol += tmpStr;
+    elementList.each(function(i, elem) {
+      let thisNode = cheerio(cheerio(this))
+      let tmpStr = thisNode.find("div[class=ip-table-content]").text()
+      let nameKey = thisNode.find("span[class=ip-table-label]").text()
+      // ip-table-label
+      tmpStr = tmpStr.toString()
+      tmpStr = tmpStr.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
+      if(tmpStr === null || tmpStr === undefined || tmpStr === ""){
+        tmpStr = cheerio(cheerio(this)).find("div[class~=ip-table-content]").text()
+        tmpStr = tmpStr.replace("\n","")
+        tmpStr = tmpStr.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, ",").replace(/\r/g,"").replace(/\t/g, "")
       }
-    });
+      if(nameKey.indexOf("IP") > -1){
+        rspIp = tmpStr
+      }else if(nameKey.indexOf("国家") > -1){
+        country += tmpStr
+      }else if(nameKey.indexOf("城市") > -1){
+        city += tmpStr
+      }else if(nameKey.indexOf("组织") > -1){
+        group += tmpStr
+      }else if(nameKey.indexOf("ASN") > -1){
+        asn += tmpStr
+      }else if(nameKey.indexOf("端口") > -1){
+        port += tmpStr
+      }else if(nameKey.indexOf("协议") > -1){
+        protocol += tmpStr
+      }
+    })
+    if(port.endsWith(",")){
+      port = port.substring(0,port.length-2)
+    }
+    port = port.replace("端口：","")
+    let splitPortArr = port.split(",")
+    if (splitPortArr !== null && splitPortArr !== undefined && splitPortArr.length > 0){
+      port = ""
+      for(let i=0; i<splitPortArr.length;i++){
+        let tmpStr = `<span class="second f-tags">${splitPortArr[i]}</span>`
+        port += tmpStr
+      }
+    }
+    if(protocol.endsWith(",")){
+      protocol = protocol.substring(0,protocol.length-2)
+    }
+    protocol = protocol.replace("协议：","")
+    let splitProtocolArr = protocol.split(",")
+    if (splitProtocolArr !== null && splitProtocolArr !== undefined && splitProtocolArr.length > 0){
+      protocol = ""
+      for(let i=0; i<splitProtocolArr.length;i++){
+        let tmpStr = `<span class="second f-tags">${splitProtocolArr[i]}</span>`
+        protocol += tmpStr
+      }
+    }
+    if(rspIp === "" || rspIp.indexOf("无数据") > -1){
+      layer.close(load);
+      layer.msg("无数据")
+      return
+    }
+    port = "端口：" + port
+    protocol = "协议：" + protocol
     document.getElementById("country").innerHTML = country;
     document.getElementById("city").innerHTML = city;
+    document.getElementById("group").innerHTML = group;
+    document.getElementById("asn").innerHTML = asn;
     document.getElementById("port").innerHTML = port;
     document.getElementById("protocol").innerHTML = protocol;
     document.getElementById("hostInfo").setAttribute("href",newUrl);
@@ -143,7 +219,7 @@ var template = (data) => {
 
 ext.tabs.query({active: true, currentWindow: true}, function(tabs) {
   var activeTab = tabs[0];
-  console.log(activeTab)
+  // console.log(activeTab)
   chrome.tabs.sendMessage(activeTab.id, { action: 'process-page' }, template);
 });
 
