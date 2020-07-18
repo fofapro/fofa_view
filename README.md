@@ -16,7 +16,7 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 #### 手动安装
 
-下载版本：https://github.com/0nise/fofa_view/releases
+下载版本：https://github.com/fofapro/fofa_view/releases
 
 ![](images/3.png)
 
@@ -32,7 +32,7 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 #### 手动安装
 
-下载版本：https://github.com/0nise/fofa_view/releases
+下载版本：https://github.com/fofapro/fofa_view/releases
 
 ![](images/6.png)
 
