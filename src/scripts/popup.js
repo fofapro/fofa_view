@@ -22,6 +22,8 @@ const baseFofaUrl = "https://fofa.so/hosts/";
 const baseFofaSearch = "https://fofa.so/result?qbase64=";
 
 var getZichan = (ip,load) => {
+  // ip = "88.198.38.135"
+  // ip = "18.163.79.100"
   let newUrl = baseFofaSearch + Base64.encode("ip=\""+ip+"\"");
   let cHost = baseFofaSearch + Base64.encode("ip=\""+ip+"/24\"");
   axios({
@@ -30,77 +32,79 @@ var getZichan = (ip,load) => {
   }).then(function (response) {
     let rspData = response.data;
     let root = cheerio.load(rspData);
-    let list = root("div[id=ajax_content]").find("div[class~=right-list-view-item]")
+    let list = root("div[class=rightListsMain]")
     let innerHtml = "";
     list.each(function (i,elem) {
-      let ndoe = cheerio(cheerio(this).find("div[class~=box-sizing]")[0])
-      let reDomain = ndoe.find("div[class=re-domain]")
-      let domainList = reDomain.find("a")
-      let url = "";
-      let host = "";
-      if (domainList != null && domainList.length > 0){
-        domainList.each(function (j,domainElement) {
-          let domainNode  = cheerio(cheerio(cheerio(this)))
-          let domainNodeClass = domainNode.attr("class")
-          if(domainNodeClass === undefined || domainNodeClass === null){
-            host = domainNode.attr("href")
-            return false
-          }
-        })
-      }else {
-        host = reDomain.text().replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
-      }
+      let node = cheerio(cheerio(this))
+      let contentMain = node.find("div[class=contentMain]")
+      let contentLeftPlist = contentMain.find("div[class=contentLeft]").find("p")
+      let title = ""
+      contentLeftPlist.each(function (i, pElement){
+        let tmpStr = cheerio(pElement).text()
+        if(i === 0){
+          title = tmpStr
+        }
+      })
+      let listAddr = node.find("div[class=listAddr]")
+      let addrLeft = listAddr.find("div[class=addrLeft]")
+      let addrRight = listAddr.find("div[class=addrRight]")
       let port = ""
+      if (addrRight.find("a[class=portHover]").length > 0){
+        port = addrRight.find("a[class=portHover]").text()
+      }
       let protocol = ""
-      let portNode = cheerio(cheerio(this).find("div[class~=re-port]")[0])
-      let portElement = portNode.find("a[class~=wordLineFeed]")
-      if(portElement !== null && portElement !== undefined){
-        port = portElement.text()
+      if (addrRight.find("a[class~=protocolHover]").length > 0){
+        protocol = addrRight.find("a[class~=protocolHover]").text()
       }else{
-        let hostSplit = host.split(":")
-        if(hostSplit.length > 1){
-          port = hostSplit[1]
+        if (port === "443"){
+          protocol = "https"
+        }else{
+          protocol = "http"
         }
       }
-      port = port.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
-      let protocolElement = portNode.find("a[class~=pro]")
-      if(protocolElement !== null && protocolElement !== undefined){
-        protocol = protocolElement.text()
-      }
-      if(port === "443" && (protocol == null || protocol === "" || protocol === undefined)){
-        protocol = "https"
-      }
-      if(protocol == null || protocol === "" || protocol === undefined){
-        protocol = "http"
-      }
-      if(port === "" || port === null || port === undefined){
-        port = "80"
-      }
-      if((protocol != null && protocol !== undefined && protocol !== "") && (protocol !== "http" && protocol !== "https") && host.indexOf(":") === -1){
-        host = host+":"+port
-      }
-      let title = ""
-      let domainNextNode = reDomain.next()
-      let domainTitleNode = domainNextNode.find("a")
-      if(domainTitleNode === undefined || domainTitleNode == null || domainTitleNode.length === 0){
-        title = domainNextNode.text()
-      }
-      title = title.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
-      if(title === "" && (protocol !== "http" && protocol !== "https")){
-        title = protocol
-      }
-      if(host.indexOf("http") > -1){
-        url = host
+      let host = ""
+      let honeypot = "否"
+      if (addrLeft.find("span[class=aSpan]").find("a").length === 0){
+        host = addrLeft.find("span[class=aSpan]").text()
+        if (port !== ""){
+          host += (":" + port)
+        }
+        if(protocol !== ""){
+          host = protocol + "://" + host
+        }
       }else{
-        url = newUrl
+        host = addrLeft.find("span[class=aSpan]").find("a").text()
+        if (host.indexOf("http") < 0){
+          if (port === "80"){
+            host = "http://"+host
+          }else if (port === "443"){
+            host = "https://"+host
+          }
+        }
+        let imgList = addrLeft.find("a").find("img")
+        console.log(imgList)
+        imgList.each(function (k, imgElement){
+          let imgElem = cheerio(imgElement)
+          let aElemStyle = imgElem.parent().attr()['style']
+          let alt = imgElem.attr()['alt']
+          if (alt !== undefined && alt === "is honeypot" && aElemStyle.indexOf("display:none;") < 0){
+            honeypot = "是"
+          }
+        })
       }
+      let url = ""
+      if (host.indexOf("http") > -1){
+        url = `<a href="${host}" target="_blank" />`
+      }
+
       let line = `
       <tr>
         <td>${title}</td>
         <td>${protocol}</td>
         <td>${port}</td>
         <td>${host}</td>
-        <td><a href="${url}" target="_blank"><i class="layui-icon">&#xe615;</i></td>
+        <td>${honeypot}</td>
+        <td>${url}<i class="layui-icon">&#xe615;</i></td>
       </tr>
       `;
       innerHtml += line;
@@ -140,7 +144,7 @@ var template = (data) => {
     let root = cheerio.load(rspData);
     let rspIp = root("li[class=layui-this]").find("div[class=ellipise]").text()
     rspIp = rspIp.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
-    let elementList = root("div[class=ip-table]").find("div[class~=ip-table-item]")
+    let elementList = root("div[class~=ipDiv]")
     let country = "国家/地区：";
     let city = "城市：";
     let group = "组织：";
@@ -149,30 +153,40 @@ var template = (data) => {
     let protocol = "协议：";
     elementList.each(function(i, elem) {
       let thisNode = cheerio(cheerio(this))
-      let tmpStr = thisNode.find("div[class=ip-table-content]").text()
-      let nameKey = thisNode.find("span[class=ip-table-label]").text()
-      // ip-table-label
-      tmpStr = tmpStr.toString()
-      tmpStr = tmpStr.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, "").replace(/\r/g,"").replace(/\t/g, "")
-      if(tmpStr === null || tmpStr === undefined || tmpStr === ""){
-        tmpStr = cheerio(cheerio(this)).find("div[class~=ip-table-content]").text()
-        tmpStr = tmpStr.replace("\n","")
-        tmpStr = tmpStr.replace(/ /g,"").replace(/&nbsp;/g, "").replace(/\n/g, ",").replace(/\r/g,"").replace(/\t/g, "")
-      }
-      if(nameKey.indexOf("IP") > -1){
-        rspIp = tmpStr
-      }else if(nameKey.indexOf("国家") > -1){
-        country += tmpStr
-      }else if(nameKey.indexOf("城市") > -1){
-        city += tmpStr
-      }else if(nameKey.indexOf("组织") > -1){
-        group += tmpStr
-      }else if(nameKey.indexOf("ASN") > -1){
-        asn += tmpStr
-      }else if(nameKey.indexOf("端口") > -1){
-        port += tmpStr
-      }else if(nameKey.indexOf("协议") > -1){
-        protocol += tmpStr
+      let nodeText = thisNode.text()
+      console.log(nodeText+"=========")
+      if(nodeText.indexOf("IP: ") === 0){
+        rspIp = nodeText.substring("IP: ".length).trim()
+      }else if(nodeText.indexOf("国家/地区: ") === 0){
+        country += nodeText.substring("国家/地区: ".length).trim()
+      }else if(nodeText.indexOf("城市: ") === 0){
+        city += nodeText.substring("城市: ".length).trim()
+      }else if(nodeText.indexOf("组织: ") === 0){
+        group += nodeText.substring("组织: ".length).trim()
+      }else if(nodeText.indexOf("ASN: ") === 0){
+        asn += nodeText.substring("ASN: ".length).trim()
+      }else if(nodeText.indexOf("端口") === 0){
+        let portList = thisNode.find("a")
+        let tmpPortList = [];
+        portList.each(function (j, a){
+          let tmpPort = cheerio(cheerio(cheerio(this))).text();
+          tmpPort = tmpPort.trim().replace(" ","")
+          if(tmpPort.indexOf("-") < 0){
+            tmpPortList.push(tmpPort)
+          }
+        })
+        port += tmpPortList.join(",")
+      }else if(nodeText.indexOf("协议") === 0){
+        let protocolList = thisNode.find("a")
+        let tmpProtocolList = [];
+        protocolList.each(function (j, a){
+          let tmpProtocol = cheerio(cheerio(cheerio(this))).text();
+          tmpProtocol = tmpProtocol.trim().replace(" ","")
+          if(tmpProtocol.indexOf("-") < 0){
+            tmpProtocolList.push(tmpProtocol)
+          }
+        })
+        protocol += tmpProtocolList.join(",")
       }
     })
     if(port.endsWith(",")){
