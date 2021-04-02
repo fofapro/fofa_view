@@ -44,6 +44,11 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 ## 更新日志
 
+2021-04-02
+
+- 优化：对接新版FOFA Pro
+- 新增：加入蜜罐识别
+
 2020-07-18
 
 - 优化：对接新版FOFA Pro
