@@ -1,6 +1,6 @@
 {
   "name": "fofa_view",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "FOFA Pro view",
   "scripts": {
     "chrome-build": "cross-env TARGET=chrome gulp",
