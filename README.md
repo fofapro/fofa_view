@@ -8,6 +8,8 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 
 项目地址：https://github.com/fofapro/fofa_view
 
+**使用插件前，请确保 fofa.info 处于登陆状态**
+
 ## 安装
 
 ![](images/1.png)
@@ -43,6 +45,10 @@ The Fofa Pro View plugin for Chrome automatically checks whether Fofa Pro has an
 ![](images/7.png)
 
 ## 更新日志
+
+2022-02-17
+
+- 优化：修复 FOFA Pro 无法访问
 
 2021-04-02
 

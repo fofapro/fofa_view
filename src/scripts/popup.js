@@ -17,9 +17,9 @@ const ipReg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
 // 域名正则
 const domainReg = /https?:\/\/.+?\//;
 
-const baseFofaUrl = "https://fofa.so/hosts/";
+const baseFofaUrl = "https://fofa.info/hosts/";
 
-const baseFofaSearch = "https://fofa.so/result?qbase64=";
+const baseFofaSearch = "https://fofa.info/result?qbase64=";
 
 var getZichan = (ip,load) => {
   // ip = "88.198.38.135"
